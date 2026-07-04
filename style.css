@@ -480,9 +480,6 @@ main {
     text-transform: uppercase;
     line-height: 1.35;
     min-height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
 }
 
@@ -494,21 +491,18 @@ main {
     margin: 0 auto;
 }
 
-/* GRIGLIA CATEGORIE */
 .categorie {
-    padding: 90px 20px 100px;
-    background: #f3f0ea;
     text-align: center;
-    border-top: 1px solid rgba(192, 166, 100, 0.40);
-    border-bottom: 1px solid rgba(192, 166, 100, 0.40);
+    padding-bottom: 80px;
 }
 
 .categorie-titolo {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 4vw, 3rem);
     color: #2c4a2e;
-    margin-bottom: 52px;
+    margin: 0 auto 52px;
     letter-spacing: 0.05em;
+    display: inline-block;
 }
 
 .categorie-griglia {
@@ -1152,7 +1146,9 @@ main {
 
     .categorie-titolo {
         font-size: 1.35rem;
-        margin-bottom: 18px;
+        margin: 0 auto 18px;
+        text-align: center;
+        display: inline-block;
     }
 
     .categorie-griglia {
@@ -1470,7 +1466,6 @@ main {
         inset: 5px;
     }
 
-    .categorie-titolo,
     .titolo-mappa {
         font-size: 1.6rem;
     }
