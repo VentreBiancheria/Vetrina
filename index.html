@@ -37,7 +37,7 @@
             <div class="valore">
                 <i class="fa-solid fa-medal valore-icona"></i>
                 <h3>Eccellenza Made in Italy</h3>
-                <p>Selezioniamo solo prodotti italiani di alta qualità.</p>
+                <p>Selezioniamo i migliori prodotti prediligendo il made in Italy di alta qualità.</p>
             </div>
             <a href="#come-raggiungerci" class="valore" style="text-decoration: none;">
                 <i class="fa-solid fa-location-dot valore-icona"></i>
@@ -103,7 +103,7 @@
             <div class="categorie-griglia">
 
                 <a href="biancheria-letto.html" class="categoria-card">
-                    <img src="https://placehold.co/600x400/2c4a2e/2c4a2e" alt="Biancheria da Letto">
+                    <img src="img/prodotti/Biancheria-letto.jpg" alt="Biancheria da Letto">
                     <div class="categoria-nome">Biancheria da Letto</div>
                 </a>
 
@@ -113,12 +113,12 @@
                 </a>
 
                 <a href="#" class="categoria-card">
-                    <img src="https://placehold.co/600x400/2c4a2e/2c4a2e" alt="Servizi da Tavola">
+                    <img src="img/prodotti/tovaglia.jpg" alt="Servizi da Tavola">
                     <div class="categoria-nome">Servizi da Tavola</div>
                 </a>
 
                 <a href="#" class="categoria-card">
-                    <img src="https://placehold.co/600x400/3a5c3c/3a5c3c" alt="Bagno">
+                    <img src="img/prodotti/Bagno.jpg" alt="Bagno">
                     <div class="categoria-nome">Bagno</div>
                 </a>
 
@@ -152,16 +152,33 @@
             </div>
         </section>
 
-        <section class="sezione-mappa" id="come-raggiungerci">
-            <h2 class="titolo-mappa">Come raggiungerci</h2>
-            <p class="sottotitolo-mappa">Vieni a trovarci nel cuore del centro storico di Salerno.</p>
+        <section class="sezione-contatti" id="come-raggiungerci">
+            <h2 class="titolo-contatti">Vieni a trovarci</h2>
+            <p class="sottotitolo-contatti">Nel cuore del centro storico di Salerno, siamo pronti ad accoglierti</p>
+            
+            <div class="contatti-container">
+                <!-- MAPPA -->
+                <div class="contatti-mappa">
+                    <div class="contenitore-mappa">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.774422131521!2d14.759333799999999!3d40.678939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bc22f5de855bf%3A0x8a1cd6700979a25c!2sVentre%20Antonio%20biancheria!5e0!3m2!1sit!2sit!4v1773412948209!5m2!1sit!2sit"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
 
-            <div class="contenitore-mappa">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.774422131521!2d14.759333799999999!3d40.678939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bc22f5de855bf%3A0x8a1cd6700979a25c!2sVentre%20Antonio%20biancheria!5e0!3m2!1sit!2sit!4v1773412948209!5m2!1sit!2sit"
-                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                <!-- RECENSIONI -->
+                <div class="contatti-recensioni">
+                    <div class="recensioni-box">
+                        <h3 class="titolo-recensioni">Lascia una recensione</h3>
+                        <p class="sottotitolo-recensioni">La tua opinione è importante per noi! Condividi la tua esperienza e aiutaci a migliorare.</p>
+                        <a href="https://g.page/r/CVyieQlw1hyKEBM/review" target="_blank" class="btn-recensioni">
+                            <i class="fa-brands fa-google"></i>
+                            Scrivi una recensione
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -177,21 +194,48 @@
             const scroll = document.querySelector('.brands-scroll');
             const track = document.querySelector('.brands-track');
 
-            if (!scroll || !track) return;
+            if (!scroll && !track) return;
 
             let pauseTimeout;
 
             const pauseAutoScroll = () => {
-                track.style.animationPlayState = 'paused';
-                clearTimeout(pauseTimeout);
-                pauseTimeout = setTimeout(() => {
-                    track.style.animationPlayState = 'running';
-                }, 1800);
+                if (track) {
+                    track.style.animationPlayState = 'paused';
+                    clearTimeout(pauseTimeout);
+                    pauseTimeout = setTimeout(() => {
+                        track.style.animationPlayState = 'running';
+                    }, 1800);
+                }
             };
 
-            scroll.addEventListener('touchstart', pauseAutoScroll, { passive: true });
-            scroll.addEventListener('touchmove', pauseAutoScroll, { passive: true });
-            scroll.addEventListener('scroll', pauseAutoScroll, { passive: true });
+            if (scroll) {
+                scroll.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+                scroll.addEventListener('touchmove', pauseAutoScroll, { passive: true });
+                scroll.addEventListener('scroll', pauseAutoScroll, { passive: true });
+            }
+
+            // Animazioni al scroll per sezioni
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Osserva sezioni principali
+            const sections = document.querySelectorAll('.categorie, .sezione-contatti, .novita');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                observer.observe(section);
+            });
         });
     </script>
 
