@@ -1112,10 +1112,6 @@ main {
     animation: scroll-brands 45s linear infinite;
 }
 
-.brands-track:hover {
-    animation-play-state: paused;
-}
-
 .brands-slide {
     display: flex;
     align-items: center;
@@ -1134,6 +1130,12 @@ main {
 .brands-slide img:hover {
     transform: scale(1.08);
     opacity: 0.85;
+}
+
+@media (min-width: 769px) {
+    .brands-track:has(.brands-slide img:hover) {
+        animation-play-state: paused;
+    }
 }
 
 .brands-slide img.logo-piccolo { height: 35px; }
