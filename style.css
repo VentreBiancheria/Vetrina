@@ -214,7 +214,7 @@ main {
    PAGINA CHI SIAMO
    ========================================== */
 .pagina-chi-siamo {
-    padding: 20px 10px;
+    padding: 0;
     background-color: #eeeeee;
 }
 
@@ -262,10 +262,11 @@ main {
 }
 
 .divisorio-elegante {
-    width: 100px;
-    height: 2px;
-    background-color: var(--colore-accento);
+    width: 120px;
+    height: 3px;
     margin: 30px auto;
+    background: linear-gradient(90deg, rgba(192,166,100,0.0), var(--colore-accento), rgba(192,166,100,0.0));
+    box-shadow: 0 4px 18px rgba(192,166,100,0.12);
 }
 
 .storia-container.storia-con-sfondo {
@@ -274,36 +275,45 @@ main {
     max-width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding: 90px 40px;
+    padding: 60px 0;
     box-sizing: border-box;
     overflow: hidden;
-    border-top: 2px solid #C0A664;
-    border-bottom: 2px solid #C0A664;
+    border-top: none;
+    border-bottom: none;
+    margin-bottom: 0;
     background-image: url('./img/via-duomo.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    min-height: 70vh;
 }
 
 .storia-container.storia-con-sfondo::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255,255,255,0.60) 0%, rgba(255,255,255,0.40) 35%, rgba(255,255,255,0.18) 65%, rgba(255,255,255,0.03) 100%);
     pointer-events: none;
 }
 
 .storia-con-sfondo .storia-box {
     position: relative;
     z-index: 1;
-    max-width: 900px;
+    max-width: 920px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.58);
+    background: rgba(255, 255, 255, 0.66);
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    padding: 55px 40px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
-    border: 1px solid rgba(192, 166, 100, 0.35);
+    padding: 48px 40px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(192, 166, 100, 0.25);
+    border-radius: 12px;
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+.storia-con-sfondo .storia-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 70px rgba(0,0,0,0.14);
 }
 
 .storia-con-sfondo .titolo-storia,
@@ -314,6 +324,17 @@ main {
 .storia-con-sfondo p,
 .storia-con-sfondo .intro-storia {
     color: #2f2f2f;
+}
+
+@media (max-width: 900px) {
+    .storia-container.storia-con-sfondo {
+        padding: 36px 12px;
+        min-height: auto;
+    }
+    .storia-con-sfondo .storia-box {
+        padding: 28px 18px;
+        margin: 0 12px;
+    }
 }
 
 /* =========================================
@@ -532,18 +553,12 @@ main {
     color: var(--colore-testo-footer);
     padding: 40px 50px 10px 50px;
     margin-top: auto;
-    border-top: 1px solid rgba(192, 166, 100, 0.2);
+    border-top: none;
     position: relative;
 }
 
 .main-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(192, 166, 100, 0.4), transparent);
+    content: none;
 }
 
 .footer-content {
@@ -838,6 +853,18 @@ main {
     margin: 0 auto;
 }
 
+.categorie-promemoria {
+    max-width: 760px;
+    margin: 34px auto 0;
+    padding: 0 18px;
+    color: #2c4a2e;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.15rem, 2.4vw, 1.65rem);
+    font-style: italic;
+    line-height: 1.55;
+    text-align: center;
+}
+
 .categoria-card {
     position: relative;
     overflow: hidden;
@@ -889,6 +916,12 @@ main {
     filter: saturate(0.92) contrast(0.96);
 }
 
+/* Specific adjustments for pigiameria image to keep focal point */
+.categoria-card img.pigiami-img {
+    object-position: center top;
+    transform-origin: center top;
+}
+
 .categoria-card:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 
@@ -935,8 +968,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 80px;
-    padding: 70px 8%;
+    gap: 96px;
+    padding: 76px 6%;
     background-color: #f9f6f1;
     width: 100%;
     border-top: 2px solid #C0A664;
@@ -945,7 +978,7 @@ main {
 
 .novita-testo {
     flex: 1;
-    max-width: 500px;
+    max-width: 620px;
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -1031,8 +1064,8 @@ main {
 }
 
 .novita-video {
-    flex: 0 0 250px;
-    max-height: 450px;
+    flex: 0 0 290px;
+    max-height: 520px;
     aspect-ratio: 9 / 16;
     border-radius: 16px;
     overflow: hidden;
@@ -1040,16 +1073,15 @@ main {
     border: 3px solid #C0A664;
 }
 
-.novita-video video,
-.novita-video iframe,
-.novita-video img {
+.novita-video video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     display: block;
+    object-fit: contain;
+    transform: scale(1.01);
+    background-color: #efbdd9;
 }
 
-/* STRISCIA BRAND */
 .brands-strip {
     width: 100%;
     overflow: hidden;
@@ -1077,7 +1109,7 @@ main {
 .brands-track {
     display: flex;
     width: max-content;
-    animation: scroll-brands 40s linear infinite;
+    animation: scroll-brands 45s linear infinite;
 }
 
 .brands-track:hover {
@@ -1113,6 +1145,11 @@ main {
 @keyframes scroll-brands {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-brands-mobile {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-10%); }
 }
 
 /* PAGINE CATEGORIA / PRODOTTI */
@@ -1488,7 +1525,11 @@ main {
 
     .brands-track {
         width: max-content;
-        animation: scroll-brands 40s linear infinite;
+        animation: scroll-brands 38s linear infinite;
+    }
+
+    .brands-track.brands-infinite-ready {
+        animation-name: scroll-brands-mobile;
     }
 
     .brands-slide {
@@ -1541,26 +1582,34 @@ main {
     }
 
     .novita {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(132px, 36%);
-        align-items: center;
-        gap: 14px;
-        padding: 32px 14px;
-        background-color: #f9f6f1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: clamp(12px, 4vw, 18px);
+        width: auto;
+        max-width: calc(100vw - 24px);
+        margin: 32px auto;
+        padding: clamp(18px, 5vw, 24px) clamp(14px, 4.5vw, 18px);
+        background: rgba(255, 255, 255, 0.72);
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 4px solid #C0A664;
     }
 
     .novita-testo {
         max-width: 100%;
         min-width: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        display: contents;
+        padding: 0;
+        border-left: 0;
+        background: transparent;
     }
 
     .novita-tag {
         display: inline-flex;
         align-items: center;
+        order: 1;
         width: auto;
         max-width: max-content;
         padding: 6px 10px;
@@ -1571,12 +1620,14 @@ main {
     }
 
     .novita-testo h2 {
-        font-size: 1rem;
-        line-height: 1.12;
+        order: 2;
+        font-size: 1.28rem;
+        line-height: 1.2;
         margin: 0;
     }
 
     .novita-testo p {
+        order: 3;
         font-size: 0.78rem;
         line-height: 1.62;
         margin: 0;
@@ -1584,6 +1635,8 @@ main {
     }
 
     .novita-btn {
+        order: 5;
+        align-self: center;
         padding: 9px 12px;
         font-size: 0.68rem;
         letter-spacing: 0.08em;
@@ -1591,9 +1644,10 @@ main {
     }
 
     .novita-video {
-        width: 100%;
-        max-width: none;
-        margin-left: auto;
+        order: 4;
+        width: min(190px, 68vw);
+        max-width: 100%;
+        margin: 2px auto 0;
         border: 2px solid #c6ab5a;
         border-radius: 14px;
         overflow: hidden;
@@ -1763,6 +1817,7 @@ main {
 
     .storia-con-sfondo .storia-box {
         max-width: 88%;
+        margin: 0 auto;
         padding: 24px 16px;
         background: rgba(255, 255, 255, 0.62);
         backdrop-filter: blur(2px);
@@ -1946,9 +2001,8 @@ main {
     }
 
     .novita {
-        grid-template-columns: minmax(0, 1fr) minmax(122px, 36%);
         gap: 12px;
-        padding: 28px 12px;
+        padding: 22px 16px;
     }
 
     .novita-tag {
@@ -1958,7 +2012,7 @@ main {
     }
 
     .novita-testo h2 {
-        font-size: 0.96rem;
+        font-size: 1.15rem;
     }
 
     .novita-btn {
@@ -1972,11 +2026,7 @@ main {
 }
 
 @media (min-width: 414px) and (max-width: 768px) {
-    .novita {
-        grid-template-columns: minmax(0, 1fr) minmax(148px, 36%);
-    }
-
     .novita-testo h2 {
-        font-size: 1.08rem;
+        font-size: 1.32rem;
     }
 }

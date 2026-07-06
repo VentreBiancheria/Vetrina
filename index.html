@@ -102,37 +102,38 @@
             <h2 class="categorie-titolo">LE NOSTRE COLLEZIONI</h2>
             <div class="categorie-griglia">
 
-                <a href="biancheria-letto.html" class="categoria-card">
+                <a href="#come-raggiungerci" class="categoria-card">
                     <img src="img/prodotti/Biancheria-letto.jpg" alt="Biancheria da Letto">
                     <div class="categoria-nome">Biancheria da Letto</div>
                 </a>
 
-                <a href="#" class="categoria-card">
-                    <img src="https://placehold.co/600x400/3a5c3c/3a5c3c" alt="Accessori Letto">
+                <a href="#come-raggiungerci" class="categoria-card">
+                    <img src="img/prodotti/materasso.jpg" alt="Accessori Letto">
                     <div class="categoria-nome">Accessori Letto</div>
                 </a>
 
-                <a href="#" class="categoria-card">
+                <a href="#come-raggiungerci" class="categoria-card">
                     <img src="img/prodotti/tovaglia.jpg" alt="Servizi da Tavola">
                     <div class="categoria-nome">Servizi da Tavola</div>
                 </a>
 
-                <a href="#" class="categoria-card">
+                <a href="#come-raggiungerci" class="categoria-card">
                     <img src="img/prodotti/Bagno.jpg" alt="Bagno">
                     <div class="categoria-nome">Bagno</div>
                 </a>
 
-                <a href="#" class="categoria-card">
-                    <img src="https://placehold.co/600x400/2c4a2e/2c4a2e" alt="Pigiameria">
+                <a href="#come-raggiungerci" class="categoria-card">
+                    <img src="img/prodotti/Pigiami.jpg" alt="Pigiameria" class="pigiami-img">
                     <div class="categoria-nome">Pigiameria</div>
                 </a>
 
-                <a href="#" class="categoria-card">
-                    <img src="https://placehold.co/600x400/3a5c3c/3a5c3c" alt="Intimo">
+                <a href="#come-raggiungerci" class="categoria-card">
+                    <img src="img/prodotti/intimo.jpg" alt="Intimo">
                     <div class="categoria-nome">Intimo</div>
                 </a>
 
             </div>
+            <p class="categorie-promemoria">Ti aspettiamo in negozio per scoprire tutti i nostri prodotti dal vivo</p>
         </section>
 
         <!-- SEZIONE NOVITÀ -->
@@ -194,9 +195,61 @@
             const scroll = document.querySelector('.brands-scroll');
             const track = document.querySelector('.brands-track');
 
-            if (!scroll && !track) return;
+            if (!scroll || !track) return;
 
             let pauseTimeout;
+            let isResettingBrandScroll = false;
+
+            const setupMobileInfiniteBrandScroll = () => {
+                if (!scroll || !track || !window.matchMedia('(max-width: 768px)').matches) return;
+
+                const originalSlides = Array.from(track.querySelectorAll('.brands-slide'));
+                if (originalSlides.length === 0) return;
+
+                while (track.children.length < 10) {
+                    originalSlides.forEach(slide => {
+                        track.appendChild(slide.cloneNode(true));
+                    });
+                }
+                track.classList.add('brands-infinite-ready');
+
+                requestAnimationFrame(() => {
+                    const slideWidth = track.querySelector('.brands-slide').offsetWidth;
+                    if (!slideWidth) return;
+
+                    const centerStart = slideWidth * 4;
+                    const minScroll = slideWidth * 2;
+                    const maxScroll = slideWidth * (track.children.length - 3);
+
+                    scroll.scrollLeft = centerStart;
+
+                    const keepBrandScrollInfinite = () => {
+                        if (isResettingBrandScroll) return;
+
+                        let nextScrollLeft = scroll.scrollLeft;
+
+                        while (nextScrollLeft < minScroll) {
+                            nextScrollLeft += slideWidth;
+                        }
+
+                        while (nextScrollLeft > maxScroll) {
+                            nextScrollLeft -= slideWidth;
+                        }
+
+                        if (nextScrollLeft !== scroll.scrollLeft) {
+                            isResettingBrandScroll = true;
+                            scroll.scrollLeft = nextScrollLeft;
+                            requestAnimationFrame(() => {
+                                isResettingBrandScroll = false;
+                            });
+                        }
+                    };
+
+                    scroll.addEventListener('scroll', () => {
+                        requestAnimationFrame(keepBrandScrollInfinite);
+                    }, { passive: true });
+                });
+            };
 
             const pauseAutoScroll = () => {
                 if (track) {
@@ -213,6 +266,8 @@
                 scroll.addEventListener('touchmove', pauseAutoScroll, { passive: true });
                 scroll.addEventListener('scroll', pauseAutoScroll, { passive: true });
             }
+
+            setupMobileInfiniteBrandScroll();
 
             // Animazioni al scroll per sezioni
             const observerOptions = {
